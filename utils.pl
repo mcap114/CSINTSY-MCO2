@@ -20,8 +20,8 @@ compatibility_report(Sign1, Sign2, Report) :-
     (   valid_zodiac_sign(Sign1),
         valid_zodiac_sign(Sign2)
     ->  (   relationship_compatibility(Sign1, Sign2)
-        ->  Report = Sign1 + ' and ' + Sign2 + ' are compatible.'
-        ;   Report = Sign1 + ' and ' + Sign2 + ' are not compatible.'
+        ->  format(atom(Report), '~w and ~w are compatible.', [Sign1, Sign2])
+        ;   format(atom(Report), '~w and ~w are not compatible.', [Sign1, Sign2])
         )
     ;   Report = 'Invalid zodiac sign(s).'
     ).

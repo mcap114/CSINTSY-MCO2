@@ -47,14 +47,32 @@
                 <img src="images/Capricorn.png" alt="Capricorn">
             </button>
         </div>
-        <div class="selected-signs">
+        <div class="choices">
+            <h2>Select a command</h2>
+            <button class="choice-button" id="choice1">1. Check Compatible Signs</button>
+            <button class="choice-button" id="choice2">2. Check Compatibility</button>
+        </div>
+
+        <div class="option1">
+            <div class="selected-signs">
+                <h2>Selected Sign</h2>
+                <p id="sign-display">Sign:</p>
+                <button id="check-compatible-signs">Check Compatible Signs</button>
+                <div class="result" id="result1"></div>
+            </div>
+        </div>
+
+        <div class="option2">
+            <div class="selected-signs">
             <h2>Selected Signs</h2>
             <p id="sign1-display">First Sign: None</p>
-            <p id="sign2-display">Second Sign: None</p>
+            <p id="sign2-display">Second Sign: None </p>
         </div>
         <button id="check-compatibility">Check Compatibility</button>
-        <div id="result"></div>
-    </div>
+        <div class="result" id="result2"></div>
+        </div>
+ </div>
+        
 
     <script src="script.js"></script>
 </body>

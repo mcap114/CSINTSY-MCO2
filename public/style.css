@@ -62,7 +62,7 @@ h1 {
     color: #555;
 }
 
-#check-compatibility {
+#check-compatibility, #check-compatible-signs {
     background-color: #4a90e2;
     color: white;
     border: none;
@@ -78,8 +78,34 @@ h1 {
     background-color: #357ABD;
 }
 
-#result {
+.result {
     font-size: 1.2em;
     color: #4a90e2;
     margin-top: 20px;
+}
+
+.choices {
+    display:flex;
+    flex-direction: column;
+}
+
+.choice-button{
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+
+.option1 {
+    display:none;
+}
+
+.option2 {
+    display: none;
 }
