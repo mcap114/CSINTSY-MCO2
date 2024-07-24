@@ -15,19 +15,16 @@ find_compatible_signs(Sign, CompatibleSigns) :-
     valid_zodiac_sign(Sign),
     findall(
         CompSign, 
-        (compatible(Sign, CompSign, _)),
+        (compatible(Sign, CompSign)),
         CompatibleSigns
     ).
 
 % Predicate to provide a compatibility report for a given pair of signs and their description
-compatibility_report(Sign1, Sign2, Report) :-
+compatibility_report(Sign1, Sign2) :-
     (   valid_zodiac_sign(Sign1),
         valid_zodiac_sign(Sign2)
-    ->  (   relationship_compatibility(Sign1, Sign2, Description)
-        ->  format(atom(Report), '~w and ~w are compatible: ~w', [Sign1, Sign2, Description])
-        ;   format(atom(Report), '~w and ~w are not compatible.', [Sign1, Sign2])
+    ->  (   relationship_compatibility(Sign1, Sign2); relationship_incompatibility(Sign1,Sign2)
         )
-    ;   Report = 'Invalid zodiac sign(s).'
     ).
 
 % Example usage of these predicates:

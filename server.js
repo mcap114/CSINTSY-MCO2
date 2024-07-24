@@ -19,14 +19,17 @@ app.post('/find-compatible-signs', (req, res) => {
             res.status(500).json({ message: 'Error processing request' });
             return;
         }
-        res.json({ message: stdout.trim() });
+        const matches = stdout.match(/\[.*?\]/);
+        const result = matches ? matches[0] : 'No compatible signs found';
+
+        res.json({ message: result });
     });
 });
 
 app.post('/compatibility', (req, res) => {
     const { sign1, sign2 } = req.body;
 
-    exec(`swipl -s compatibility_system.pl -s utils.pl -g "compatibility_report('${sign1}', '${sign2}', Report), write(Report), nl, halt."`, (error, stdout, stderr) => {
+    exec(`swipl -s compatibility_system.pl -s utils.pl -g "compatibility_report('${sign1}', '${sign2}'), nl, halt."`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             res.status(500).json({ message: 'Error processing request' });
