@@ -1,12 +1,14 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: #f7f7f9;
+    color: #4a4a4a;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .container {
@@ -14,15 +16,37 @@ body {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 800px;
+    max-width: 1000px;
     width: 100%;
 }
 
+.section{
+    display: flex;
+}
+
+.left-section {
+    width: 60%;
+}
+
+.right-section {
+    width: 40%;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
 h1 {
-    color: #333;
+    color: #4a4a4a;
     margin-bottom: 20px;
-    font-size: 2em;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
+}
+
+h2 {
+    color: #4a4a4a;
+    font-size: 1.8em;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 .zodiac-buttons {
@@ -35,25 +59,71 @@ h1 {
 
 .zodiac-btn {
     background-color: #ffffff;
-    border: 2px solid #4a90e2;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 15px;
+    border: 2px solid #a8d5e2;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     transition: transform 0.3s, background-color 0.3s, border-color 0.3s;
-    text-align: center;
+    position: relative;
 }
 
 .zodiac-btn img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 .zodiac-btn:hover {
     transform: scale(1.1);
-    background-color: #f0f4f8;
-    border-color: #357ABD;
+    background-color: #e7f2f8;
+    border-color: #88b7c5;
+}
+
+.zodiac-btn::after {
+    content: attr(data-desc);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background-color: #e7f2f8;
+    color: #4a4a4a;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    font-size: 0.9em;
+}
+
+.zodiac-btn:hover::after {
+    opacity: 1;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.choice-button {
+    background-color: #a8d5e2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.choice-button:hover {
+    background-color: #88b7c5;
 }
 
 .selected-signs {
@@ -63,49 +133,28 @@ h1 {
 }
 
 #check-compatibility, #check-compatible-signs {
-    background-color: #4a90e2;
+    background-color: #a8d5e2;
     color: white;
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
     cursor: pointer;
-    margin: 10px;
-    font-size: 1em;
+    margin: 10px 0;
+    font-size: 16px;
     font-weight: 600;
+    transition: background-color 0.3s;
 }
 
-#check-compatibility:hover {
-    background-color: #357ABD;
+#check-compatibility:hover, #check-compatible-signs:hover {
+    background-color: #88b7c5;
 }
 
 .result {
     font-size: 1.2em;
-    color: #4a90e2;
+    color: #88b7c5;
     margin-top: 20px;
 }
 
-.choices {
-    display:flex;
-    flex-direction: column;
-}
-
-.choice-button{
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px;
-    font-size: 1em;
-    font-weight: 600;
-}
-
-
-.option1 {
-    display:none;
-}
-
-.option2 {
+.option1, .option2 {
     display: none;
 }

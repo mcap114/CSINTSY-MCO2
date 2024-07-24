@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.option1').style.display = 'none';
     });
 
+    document.querySelector('#clearselection').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector('.option1').style.display = 'none';
+        document.querySelector('.option2').style.display = 'none';
+    });
+
     zodiacButtons.forEach(button => {
         button.addEventListener('click', () => {
             const sign = button.getAttribute('data-sign');

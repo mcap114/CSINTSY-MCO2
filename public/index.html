@@ -9,70 +9,77 @@
 <body>
     <div class="container">
         <h1>Zodiac Compatibility Checker</h1>
-        <div class="zodiac-buttons">
-            <button class="zodiac-btn" data-sign="Aquarius">
-                <img src="images/aquarius.png" alt="Aquarius">
-            </button>
-            <button class="zodiac-btn" data-sign="Pisces">
-                <img src="images/pisces.png" alt="Pisces">
-            </button>
-            <button class="zodiac-btn" data-sign="Aries">
-                <img src="images/aries.png" alt="Aries">
-            </button>
-            <button class="zodiac-btn" data-sign="Taurus">
-                <img src="images/taurus.png" alt="Taurus">
-            </button>
-            <button class="zodiac-btn" data-sign="Gemini">
-                <img src="images/gemini.png" alt="Gemini">
-            </button>
-            <button class="zodiac-btn" data-sign="Cancer">
-                <img src="images/cancer.png" alt="Cancer">
-            </button>
-            <button class="zodiac-btn" data-sign="Leo">
-                <img src="images/leo.png" alt="Leo">
-            </button>
-            <button class="zodiac-btn" data-sign="Virgo">
-                <img src="images/virgo.png" alt="Virgo">
-            </button>
-            <button class="zodiac-btn" data-sign="Libra">
-                <img src="images/libra.png" alt="Libra">
-            </button>
-            <button class="zodiac-btn" data-sign="Scorpio">
-                <img src="images/scorpio.png" alt="Scorpio">
-            </button>
-            <button class="zodiac-btn" data-sign="Sagittarius">
-                <img src="images/sagittarius.png" alt="Sagittarius">
-            </button>
-            <button class="zodiac-btn" data-sign="Capricorn">
-                <img src="images/Capricorn.png" alt="Capricorn">
-            </button>
-        </div>
-        <div class="choices">
-            <h2>Select a command</h2>
-            <button class="choice-button" id="choice1">1. Check Compatible Signs</button>
-            <button class="choice-button" id="choice2">2. Check Compatibility</button>
-        </div>
+        <div class="section">
+            <div class="left-section">
+                <h2>Air Signs</h2>
+                <div class="zodiac-buttons air-signs">
+                    <button class="zodiac-btn" data-sign="Aquarius" data-desc="Humanitarian, eccentric, individualistic, cool">
+                        <img src="images/aquarius.png" alt="Aquarius">
+                    </button>
+                    <button class="zodiac-btn" data-sign="Gemini" data-desc="Independent, curious, charming, gentle">
+                        <img src="images/gemini.png" alt="Gemini">
+                    </button>
+                    <button class="zodiac-btn" data-sign="Libra" data-desc="Romantic, artistic, friendly, persuasive">
+                        <img src="images/libra.png" alt="Libra">
+                    </button>
+                </div>
 
-        <div class="option1">
-            <div class="selected-signs">
-                <h2>Selected Sign</h2>
-                <p id="sign-display">Sign:</p>
-                <button id="check-compatible-signs">Check Compatible Signs</button>
-                <div class="result" id="result1"></div>
+                <h2>Water Signs</h2>
+                <div class="zodiac-buttons water-signs">
+                    <button class="zodiac-btn" data-sign="Pisces" data-desc="Creative, easy-going, faithful, sensitive">
+                        <img src="images/pisces.png" alt="Pisces">
+                    </button>
+                    <button class="zodiac-btn" data-sign="Cancer" data-desc="Compassionate, sentimental, protective, emotional">
+                        <img src="images/cancer.png" alt="Cancer">
+                    </button>
+                    <button class="zodiac-btn" data-sign="Scorpio" data-desc="Mysterious, powerful, brave, resourceful">
+                        <img src="images/scorpio.png" alt="Scorpio">
+                    </button>
+                </div>
+
+                <h2>Earth Signs</h2>
+                <div class="zodiac-buttons earth-signs">
+                    <button class="zodiac-btn" data-sign="Taurus" data-desc="Kind, generous, loyal, patient">
+                        <img src="images/taurus.png" alt="Taurus">
+                    </button>
+                    <button class="zodiac-btn" data-sign="Virgo" data-desc="Humble, practical, organised, patient">
+                        <img src="images/virgo.png" alt="Virgo">
+                    </button>
+                    <button class="zodiac-btn" data-sign="Capricorn" data-desc="Traditional, disciplined, ambitious, independent">
+                        <img src="images/capricorn.png" alt="Capricorn">
+                    </button>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="choices">
+                    <h2>Select a command</h2>
+                    <button class="choice-button" id="choice1">1. Check Compatible Signs</button>
+                    <button class="choice-button" id="choice2">2. Check Compatibility</button>
+                    <button class="choice-button" id="clearselection">3. Clear Selection</button>
+                </div>
+
+                <div class="option1">
+                    <div class="selected-signs">
+                        <h2>Selected Sign</h2>
+                        <p id="sign-display">Sign:</p>
+                        <button id="check-compatible-signs">Check Compatible Signs</button>
+                        <div class="result" id="result1"></div>
+                    </div>
+                </div>
+
+                <div class="option2">
+                    <div class="selected-signs">
+                        <h2>Selected Signs</h2>
+                        <p id="sign1-display">First Sign: None</p>
+                        <p id="sign2-display">Second Sign: None</p>
+                    </div>
+                    <button id="check-compatibility">Check Compatibility</button>
+                    <div class="result" id="result2"></div>
+                </div>
             </div>
         </div>
-
-        <div class="option2">
-            <div class="selected-signs">
-            <h2>Selected Signs</h2>
-            <p id="sign1-display">First Sign: None</p>
-            <p id="sign2-display">Second Sign: None </p>
-        </div>
-        <button id="check-compatibility">Check Compatibility</button>
-        <div class="result" id="result2"></div>
-        </div>
- </div>
-        
+    </div>
 
     <script src="script.js"></script>
 </body>
