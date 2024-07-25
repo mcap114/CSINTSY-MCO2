@@ -30,6 +30,7 @@ print_compatibility_details([Head|Tail], Sign) :-
     (   compatible(Sign, Head)
     ->  format('~w and ~w are compatible: ~n', [Sign, Head]),
         compatibility_description(Sign, Head),
+        format('~n'),
         print_compatibility_details(Tail, Sign)
     ;   print_compatibility_details(Tail, Sign)
     ).
