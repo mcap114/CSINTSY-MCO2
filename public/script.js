@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const zodiacButtons = document.querySelectorAll('.zodiac-btn');
     const sign1Display = document.getElementById('sign1-display');
     const sign2Display = document.getElementById('sign2-display');
-    const signDisplay = document.getElementById('sign-display'); //for option1
+    const signDisplay = document.getElementById('sign-display'); 
     const resultDiv1 = document.getElementById('result1');
     const resultDiv2 = document.getElementById('result2');
+    const prologConsole = document.getElementById('prolog-console');
     let selectedSign1 = null;
     let selectedSign2 = null;
-    let selectedSign = null; //for option1 
+    let selectedSign = null; 
 
     document.querySelector('#choice1').addEventListener('click', function(event) {
         event.preventDefault();
@@ -25,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         document.querySelector('.option1').style.display = 'none';
         document.querySelector('.option2').style.display = 'none';
+    });
+
+    zodiacButtons.forEach(button => {
+        const desc = button.getAttribute('data-desc');
+        const formattedDesc = desc.replace(/\\n/g, '\n\n');
+        button.setAttribute('data-desc', formattedDesc);
     });
 
     zodiacButtons.forEach(button => {
@@ -64,7 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.json())
             .then(data => {
-                resultDiv1.textContent = data.message;
+                const formattedMessage = data.message.replace(/\n/g, '<br>');
+                resultDiv1.innerHTML = formattedMessage; 
+                logToPrologConsole(`?- find_compatible_signs('${selectedSign}', CompatibleSigns).\nCompatibleSigns = [\n${data.message}].`);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -74,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
             resultDiv1.textContent = 'Please select a zodiac sign.';
         }
     });
-
 
     document.getElementById('check-compatibility').addEventListener('click', () => {
         if (selectedSign1 && selectedSign2) {
@@ -87,7 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.json())
             .then(data => {
-                resultDiv2.textContent = data.message;
+                const formattedMessage = data.message.replace(/\n/g, '<br>');
+                resultDiv2.innerHTML = formattedMessage; 
+                logToPrologConsole(`?- compatibility_report('${selectedSign1}', '${selectedSign2}', Report).\nReport = ${data.message}.`);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -98,9 +108,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    document.getElementById('execute-prolog').addEventListener('click', () => {
+        const commandInput = document.getElementById('prolog-command');
+        let command = commandInput.value;
 
-  
-    
+        if (command.startsWith('?- ')) {
+            command = command.slice(3);
+        }
+
+        fetch('/execute-prolog', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ command: command }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            logToPrologConsole(`?- ${command}.\n${data.message}`);
+            commandInput.value = '';  
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            logToPrologConsole(`${command}.\nError occurred while executing command.`);
+        });
+    });
+
+    function logToPrologConsole(message) {
+        const prologConsole = document.getElementById('prolog-console');
+        prologConsole.value += message + '\n\n';
+    }
+
 });
-
-

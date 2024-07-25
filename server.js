@@ -22,7 +22,7 @@ app.post('/find-compatible-signs', (req, res) => {
         const matches = stdout.match(/\[.*?\]/);
         const result = matches ? matches[0] : 'No compatible signs found';
 
-        res.json({ message: result });
+        res.json({ message: stdout.trim() });
     });
 });
 
@@ -33,6 +33,19 @@ app.post('/compatibility', (req, res) => {
         if (error) {
             console.error(`exec error: ${error}`);
             res.status(500).json({ message: 'Error processing request' });
+            return;
+        }
+        res.json({ message: stdout.trim() });
+    });
+});
+
+app.post('/execute-prolog', (req, res) => {
+    const { command } = req.body;
+
+    exec(`swipl -s compatibility_system.pl -s utils.pl -g "${command}, halt."`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            res.status(500).json({ message: stderr.trim() || 'Error processing request' });
             return;
         }
         res.json({ message: stdout.trim() });

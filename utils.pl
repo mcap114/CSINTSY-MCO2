@@ -29,4 +29,4 @@ compatibility_report(Sign1, Sign2) :-
 
 % Example usage of these predicates:
 % ?- find_compatible_signs('Aries', CompatibleSigns).
-% ?- compatibility_report('Aries', 'Leo', Report).
+% ?- compatibility_report('Aries', 'Leo').

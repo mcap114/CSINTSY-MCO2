@@ -11,63 +11,60 @@
         <h1>Zodiac Compatibility Checker</h1>
         <div class="section">
             <div class="left-section">
-
                 <h2>Fire Signs</h2>
-                <div class="zodiac-buttons water-signs">
-                    <button class="zodiac-btn" data-sign="Aries" data-desc="Creative, easy-going, faithful, sensitive">
+                <div class="zodiac-buttons air-signs">
+                    <button class="zodiac-btn" data-sign="Aries" data-desc="Date: Mar 21 – Apr 19\nKey traits: fiery, passionate, determined, courageous">
                         <img src="images/aries.png" alt="Aries">
                     </button>
-                    <button class="zodiac-btn" data-sign="Leo" data-desc="Compassionate, sentimental, protective, emotional">
+                    <button class="zodiac-btn" data-sign="Leo" data-desc="Date: Jul 23 – Aug 22\nKey traits: charismatic, dramatic, confident, fun">
                         <img src="images/leo.png" alt="Leo">
                     </button>
-                    <button class="zodiac-btn" data-sign="Sagittarius" data-desc="Mysterious, powerful, brave, resourceful">
+                    <button class="zodiac-btn" data-sign="Sagittarius" data-desc="Date: Nov 22 – Dec 21\nKey traits: philosophical, optimistic, adventurous, free-spirited">
                         <img src="images/sagittarius.png" alt="Sagittarius">
                     </button>
                 </div>
 
-
                 <h2>Air Signs</h2>
                 <div class="zodiac-buttons air-signs">
-                    <button class="zodiac-btn" data-sign="Aquarius" data-desc="Humanitarian, eccentric, individualistic, cool">
+                    <button class="zodiac-btn" data-sign="Aquarius" data-desc="Date: Jan 20 - Feb 18\nKey traits: humanitarian, eccentric, individualistic, cool">
                         <img src="images/aquarius.png" alt="Aquarius">
                     </button>
-                    <button class="zodiac-btn" data-sign="Gemini" data-desc="Independent, curious, charming, gentle">
+                    <button class="zodiac-btn" data-sign="Gemini" data-desc="Date: May 21 - Jun 20\nKey traits: independent, curious, charming, gentle">
                         <img src="images/gemini.png" alt="Gemini">
                     </button>
-                    <button class="zodiac-btn" data-sign="Libra" data-desc="Romantic, artistic, friendly, persuasive">
+                    <button class="zodiac-btn" data-sign="Libra" data-desc="Date: Sep 23 - Oct 22\nKey traits: romantic, artistic, friendly, persuasive">
                         <img src="images/libra.png" alt="Libra">
                     </button>
                 </div>
 
                 <h2>Water Signs</h2>
                 <div class="zodiac-buttons water-signs">
-                    <button class="zodiac-btn" data-sign="Pisces" data-desc="Creative, easy-going, faithful, sensitive">
+                    <button class="zodiac-btn" data-sign="Pisces" data-desc="Date: Feb 19 - Mar 20\nKey traits: creative, easy-going, faithful, sensitive">
                         <img src="images/pisces.png" alt="Pisces">
                     </button>
-                    <button class="zodiac-btn" data-sign="Cancer" data-desc="Compassionate, sentimental, protective, emotional">
+                    <button class="zodiac-btn" data-sign="Cancer" data-desc="Date: Jun 21 - Jul 22\nKey traits: compassionate, sentimental, protective, emotional">
                         <img src="images/cancer.png" alt="Cancer">
                     </button>
-                    <button class="zodiac-btn" data-sign="Scorpio" data-desc="Mysterious, powerful, brave, resourceful">
+                    <button class="zodiac-btn" data-sign="Scorpio" data-desc="Date: Oct 23 - Nov 21\nKey traits: mysterious, powerful, brave, resourceful">
                         <img src="images/scorpio.png" alt="Scorpio">
                     </button>
                 </div>
 
                 <h2>Earth Signs</h2>
                 <div class="zodiac-buttons earth-signs">
-                    <button class="zodiac-btn" data-sign="Taurus" data-desc="Kind, generous, loyal, patient">
+                    <button class="zodiac-btn" data-sign="Taurus" data-desc="Date: Apr 20 - May 20\nKey traits: kind, generous, loyal, patient">
                         <img src="images/taurus.png" alt="Taurus">
                     </button>
-                    <button class="zodiac-btn" data-sign="Virgo" data-desc="Humble, practical, organised, patient">
+                    <button class="zodiac-btn" data-sign="Virgo" data-desc="Date: Aug 23 - Sep 22\nKey traits: humble, practical, organised, patient">
                         <img src="images/virgo.png" alt="Virgo">
                     </button>
-                    <button class="zodiac-btn" data-sign="Capricorn" data-desc="Traditional, disciplined, ambitious, independent">
+                    <button class="zodiac-btn" data-sign="Capricorn" data-desc="Date: Dec 22 - Jan 19\nKey traits: traditional, disciplined, ambitious, independent">
                         <img src="images/capricorn.png" alt="Capricorn">
                     </button>
                 </div>
             </div>
 
-            <div class="right-section">
-
+            <div class="middle-section">
                 <div class="choices">
                     <h2>Select a command</h2>
                     <button class="choice-button" id="choice1">1. Check Compatible Signs</button>
@@ -94,8 +91,19 @@
                     <div class="result" id="result2"></div>
                 </div>
             </div>
+
+            <div class="right-section">
+                <h2>Prolog Console</h2>
+                <textarea id="prolog-console" rows="20" cols="30" readonly></textarea>
+                <div class="input">
+                    <input type="text" id="prolog-command" placeholder="Enter Prolog command" />
+                    <button id="execute-prolog">Execute</button>
+                </div>
+            </div>
+            
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
