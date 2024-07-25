@@ -1,7 +1,8 @@
 % compatibility_system.pl
 
-% FACTS
+:- [utils].
 
+% FACTS
 
 % Facts: Sign classification based on Classical Elements
 fire_sign('Aries').
@@ -36,79 +37,59 @@ mutable_sign('Virgo').
 mutable_sign('Sagittarius').
 mutable_sign('Pisces').
 
-
-
 % COMPATIBILITY RULES
-
-
 
 % Rule: General compatibility for fire signs
 compatible(Sign1, Sign2) :- 
     fire_sign(Sign1),
-    fire_sign(Sign2),
-    format('~w and ~w are compatible: They are both fire signs, which typically share energy, enthusiasm, and a dynamic approach to life.~n~n', [Sign1, Sign2]).
+    fire_sign(Sign2).
 
 % Rule: General compatibility for earth signs
 compatible(Sign1, Sign2) :- 
     earth_sign(Sign1),
-    earth_sign(Sign2),
-    format('~w and ~w are compatible: They are both earth signs, which typically share practical and stable qualities.~n~n', [Sign1, Sign2]).
+    earth_sign(Sign2).
 
 % Rule: General compatibility for air signs
 compatible(Sign1, Sign2) :- 
     air_sign(Sign1),
-    air_sign(Sign2),
-    format('~w and ~w are compatible: They are both air signs, which typically share intellectual and communicative qualities.~n~n', [Sign1, Sign2]).
+    air_sign(Sign2).
 
 % Rule: General compatibility for water signs
 compatible(Sign1, Sign2) :- 
     water_sign(Sign1),
-    water_sign(Sign2),
-    format('~w and ~w are compatible: They are both water signs, meaning they find an intuitive understanding and emotional resonance that can be deeply fulfilling.~n~n', [Sign1, Sign2]).
+    water_sign(Sign2).
 
 % Rule: Water signs are compatible with earth signs
 compatible(Sign1, Sign2) :-
     ((water_sign(Sign1), earth_sign(Sign2));
-     (earth_sign(Sign1), water_sign(Sign2))),
-    format('~w and ~w are compatible: Earth and water signs complement each other well, with earth providing stability and water offering emotional depth.~n~n', [Sign1, Sign2]).
+     (earth_sign(Sign1), water_sign(Sign2))).
 
 % Rule: Fire signs are compatible with air signs
 compatible(Sign1, Sign2) :-
     ((fire_sign(Sign1), air_sign(Sign2));
-     (air_sign(Sign1), fire_sign(Sign2))),
-    format('~w and ~w are compatible: They share an optimism and curiosity about life, which ensures their time together is filled with exploration, laughter, and mutual growth.~n~n', [Sign1, Sign2]).
-
-
+     (air_sign(Sign1), fire_sign(Sign2))).
 
 % INCOMPATIBILITY RULES
-
-
 
 % Rule: Fire signs are generally incompatible with water signs
 incompatible(Sign1, Sign2) :-
     fire_sign(Sign1),
-    water_sign(Sign2),
-    format('~w and ~w are generally incompatible: Fire and water signs often clash, with fire being too intense and water being too emotional.~n~n', [Sign1, Sign2]).
+    water_sign(Sign2).
 
 % Rule: Earth signs are generally incompatible with fire signs
 incompatible(Sign1, Sign2) :-
     fire_sign(Sign1),
-    earth_sign(Sign2),
-    format('~w and ~w are generally incompatible: Fire signs may find earth signs too slow or cautious, while earth signs may see fire signs as reckless or impulsive.~n~n', [Sign1, Sign2]).
+    earth_sign(Sign2).
 
 % Rule: Water signs are generally incompatible with air signs
 incompatible(Sign1, Sign2) :-
     air_sign(Sign1),
-    water_sign(Sign2),
-    format('~w and ~w are generally incompatible: Air signs may find water signs too emotional or clingy, while water signs may see air signs as detached or inconsistent.~n~n', [Sign1, Sign2]).
+    water_sign(Sign2).
 
 % Rule: Air signs are generally incompatible with earth signs
 incompatible(Sign1, Sign2) :-
     earth_sign(Sign1),
-    air_sign(Sign2),
-    format('~w and ~w are generally incompatible: Earth and air signs often have different priorities, with earth being practical and air being intellectual.~n~n', [Sign1, Sign2]).
-
-
+    air_sign(Sign2).
 
 % Rule: Check if two zodiac signs are compatible
 relationship_compatibility(Sign1, Sign2) :-
@@ -120,9 +101,30 @@ relationship_incompatibility(Sign1, Sign2) :-
     incompatible(Sign1, Sign2);
     incompatible(Sign2, Sign1).
 
+% Provide a description based on compatibility
+compatibility_description(Sign1, Sign2) :-
+    (   fire_sign(Sign1),
+        fire_sign(Sign2)
+    ->  format('They are both fire signs, which typically share energy, enthusiasm, and a dynamic approach to life.~n')
+    ;   earth_sign(Sign1),
+        earth_sign(Sign2)
+    ->  format('They are both earth signs, which typically share practical and stable qualities.~n')
+    ;   air_sign(Sign1),
+        air_sign(Sign2)
+    ->  format('They are both air signs, which typically share intellectual and communicative qualities.~n')
+    ;   water_sign(Sign1),
+        water_sign(Sign2)
+    ->  format('They are both water signs, meaning they find an intuitive understanding and emotional resonance that can be deeply fulfilling.~n')
+    ;   (   (water_sign(Sign1), earth_sign(Sign2));
+            (earth_sign(Sign1), water_sign(Sign2))
+        )
+    ->  format('Earth and water signs complement each other well, with earth providing stability and water offering emotional depth.~n')
+    ;   (   (fire_sign(Sign1), air_sign(Sign2));
+            (air_sign(Sign1), fire_sign(Sign2))
+        )
+    ->  format('They share an optimism and curiosity about life, which ensures their time together is filled with exploration, laughter, and mutual growth.~n')
+    ).
 
-% Query examples:
-$ ?- compatible('Scorpio', 'Sagittarius').
-% ?- relationship_compatibility('Aries', 'Leo').
-% ?- relationship_incompatibility('Aries', 'Cancer').
-
+% Example usage of these predicates:
+% ?- find_compatible_signs('Aries', CompatibleSigns).
+% ?- compatibility_report('Aries', 'Leo').

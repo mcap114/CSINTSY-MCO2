@@ -26,6 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         document.querySelector('.option1').style.display = 'none';
         document.querySelector('.option2').style.display = 'none';
+        selectedSign1 = null;
+        selectedSign2 = null;
+        selectedSign = null;
+        sign1Display.textContent = 'First Sign: None';
+        sign2Display.textContent = 'Second Sign: None';
+        signDisplay.textContent = 'Sign:';
+        resultDiv1.textContent = '';
+        resultDiv2.textContent = '';
+        prologConsole.value = '';
     });
 
     zodiacButtons.forEach(button => {
@@ -131,18 +140,19 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(response => response.json())
         .then(data => {
-            logToPrologConsole(`?- ${command}.\n${data.message}`);
-            commandInput.value = ''; 
+            logToPrologConsole(formattedCommand);
+            logToPrologConsole(data.result);
         })
         .catch(error => {
             console.error('Error:', error);
-            logToPrologConsole(`${command}.\nError occurred while executing command.`);
+            logToPrologConsole(`Error: ${error}`);
         });
+    
+        commandInput.value = '';
     });
     
     function logToPrologConsole(message) {
-        const prologConsole = document.getElementById('prolog-console');
         prologConsole.value += message + '\n';
+        prologConsole.scrollTop = prologConsole.scrollHeight;
     }
-    
 });

@@ -1,5 +1,3 @@
-// server.js (Node.js example)
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const { exec } = require('child_process');
@@ -12,49 +10,47 @@ app.use(express.static('public'));
 
 app.post('/find-compatible-signs', (req, res) => {
     const { sign } = req.body;
+    const query = `find_compatible_signs('${sign}', CompatibleSigns).`;
 
-    exec(`swipl -s compatibility_system.pl -s utils.pl -g "find_compatible_signs('${sign}', CompatibleSigns), write(CompatibleSigns), nl, halt."`, (error, stdout, stderr) => {
+    exec(`swipl -q -s compatibility_system.pl -g "${query}" -t halt`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            res.status(500).json({ message: 'Error processing request' });
+            console.error(stderr);
+            res.status(500).send({ error: 'Failed to execute Prolog command' });
             return;
         }
-        const matches = stdout.match(/\[.*?\]/);
-        const result = matches ? matches[0] : 'No compatible signs found';
-
-        res.json({ message: stdout.trim() });
+        res.send({ message: stdout.trim() });
     });
 });
 
 app.post('/compatibility', (req, res) => {
     const { sign1, sign2 } = req.body;
+    const query = `compatibility_report('${sign1}', '${sign2}', Report).`;
 
-    exec(`swipl -s compatibility_system.pl -s utils.pl -g "compatibility_report('${sign1}', '${sign2}'), nl, halt."`, (error, stdout, stderr) => {
+    exec(`swipl -q -s compatibility_system.pl -g "${query}" -t halt`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            res.status(500).json({ message: 'Error processing request' });
+            console.error(stderr);
+            res.status(500).send({ error: 'Failed to execute Prolog command' });
             return;
         }
-        res.json({ message: stdout.trim() });
+        res.send({ message: stdout.trim() });
     });
 });
 
 app.post('/execute-prolog', (req, res) => {
     const { command } = req.body;
-
-    const sanitizedCommand = command.trim().replace(/\.$/, '');
-
-    exec(`swipl -s compatibility_system.pl -s utils.pl -g "${sanitizedCommand}, halt."`, (error, stdout, stderr) => {
+    exec(`swipl -q -s compatibility_system.pl -g "${command}" -t halt`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            res.status(500).json({ message: 'Error processing request' });
+            console.error(stderr);
+            res.status(500).send({ error: 'Failed to execute Prolog command' });
             return;
         }
-        res.json({ message: stdout.trim() });
+        res.send({ result: stdout.trim() });
     });
 });
 
-
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
