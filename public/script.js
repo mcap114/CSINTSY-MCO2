@@ -110,33 +110,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('execute-prolog').addEventListener('click', () => {
         const commandInput = document.getElementById('prolog-command');
-        let command = commandInput.value;
-
+        let command = commandInput.value.trim();
+    
         if (command.startsWith('?- ')) {
-            command = command.slice(3);
+            command = command.slice(3).trim();
         }
-
+    
+        if (command.endsWith('.')) {
+            command = command.slice(0, -1).trim();
+        }
+    
+        const formattedCommand = `${command}.`;
+    
         fetch('/execute-prolog', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ command: command }),
+            body: JSON.stringify({ command: formattedCommand }),
         })
         .then(response => response.json())
         .then(data => {
             logToPrologConsole(`?- ${command}.\n${data.message}`);
-            commandInput.value = '';  
+            commandInput.value = ''; 
         })
         .catch(error => {
             console.error('Error:', error);
             logToPrologConsole(`${command}.\nError occurred while executing command.`);
         });
     });
-
+    
     function logToPrologConsole(message) {
         const prologConsole = document.getElementById('prolog-console');
-        prologConsole.value += message + '\n\n';
+        prologConsole.value += message + '\n';
     }
-
+    
 });

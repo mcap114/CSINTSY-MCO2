@@ -42,15 +42,18 @@ app.post('/compatibility', (req, res) => {
 app.post('/execute-prolog', (req, res) => {
     const { command } = req.body;
 
-    exec(`swipl -s compatibility_system.pl -s utils.pl -g "${command}, halt."`, (error, stdout, stderr) => {
+    const sanitizedCommand = command.trim().replace(/\.$/, '');
+
+    exec(`swipl -s compatibility_system.pl -s utils.pl -g "${sanitizedCommand}, halt."`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
-            res.status(500).json({ message: stderr.trim() || 'Error processing request' });
+            res.status(500).json({ message: 'Error processing request' });
             return;
         }
         res.json({ message: stdout.trim() });
     });
 });
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
