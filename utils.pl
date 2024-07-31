@@ -83,17 +83,17 @@ compatibility_description(Sign1, Sign2, Description) :-
 
 % Predicate to provide a description based on incompatibility
 incompatibility_description(Sign1, Sign2, Description) :-
-    (   fire_sign(Sign1),
-        water_sign(Sign2)
+    (   ((fire_sign(Sign1), water_sign(Sign2));
+        (water_sign(Sign1), fire_sign(Sign2)))
     ->  Description = 'Fire signs are generally incompatible with water signs, as their differing elements may lead to conflict.'
-    ;   earth_sign(Sign1),
-        fire_sign(Sign2)
+    ;   ((earth_sign(Sign1), fire_sign(Sign2));
+        (fire_sign(Sign1), earth_sign(Sign2)))
     ->  Description = 'Earth signs are generally incompatible with fire signs, due to differing approaches and values.'
-    ;   water_sign(Sign1),
-        air_sign(Sign2)
+    ;   ((water_sign(Sign1), air_sign(Sign2));
+        (air_sign(Sign1), water_sign(Sign2)))
     ->  Description = 'Water signs are generally incompatible with air signs, as their emotional and intellectual needs may not align.'
-    ;   air_sign(Sign1),
-        earth_sign(Sign2)
+    ;   ((air_sign(Sign1), earth_sign(Sign2));
+        (earth_sign(Sign1), air_sign(Sign2)))
     ->  Description = 'Air signs are generally incompatible with earth signs, as their differing perspectives and priorities can create friction.'
     ).
 
