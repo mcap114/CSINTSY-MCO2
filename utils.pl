@@ -99,4 +99,4 @@ incompatibility_description(Sign1, Sign2, Description) :-
 
 % Example usage of these predicates:
 % ?- find_compatible_signs('Aries', CompatibleSigns).
-% ?- compatibility_report('Aries', 'Leo').
+% ?- compatibility_report('Aries', 'Leo', Report).
